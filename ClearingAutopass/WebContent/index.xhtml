@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Accompaniment Clearing</title>
+	<h:outputStylesheet library="css" name="style.css" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta http-equiv="refresh" content="#{StageBean.getStage() == 'Running.' ? '5' : '3600'}"/>
+</h:head>
+<h:body>
+	<div id="principal">
+		<div id="mensagem">
+			<h:outputText value="#{StageBean.getStage()}" style="color:#{StageBean.getStage() == 'Running.' ? '#CB0003' : '#3B5998'}"/>
+			<br/>
+			<h:outputText value="Errors: #{LogBean.getErrors()}" style="color:#{LogBean.getErrors() > 0 ? '#CB0003' : '#3B5998'}"/>
+		</div>
+		<div id="status">
+			<h:dataTable value="#{StatusBean.getStatus()}" var="i"
+				styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer"
+				columnClasses="celluleLeft,celluleCenter">
+				<h:column>
+					<f:facet name="header">Start</f:facet>
+					<h:outputText value="#{i.start}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Last</f:facet>
+					<h:outputText value="#{i.last}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Time Running</f:facet>
+					<h:outputText value="#{i.timeRunning} Hrs"/>
+				</h:column>
+			</h:dataTable>
+		</div>	
+		<div id="realtime">
+			<h:dataTable value="#{RealTimeBean.getRealTime()}" var="i"
+				styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer"
+				columnClasses="celluleLeft,celluleCenter">
+				<h:column>
+					<f:facet name="header">Message</f:facet>
+					<h:outputText value="#{i.message}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Last Update</f:facet>
+					<h:outputText value="#{i.lastUpdate}" />
+				</h:column>
+			</h:dataTable>
+		</div>	
+		<div id="stage">
+			<h:dataTable value="#{StageBean.getLastStage()}" var="i"
+				styleClass="default-table-big" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer"
+				columnClasses="celluleLeft">
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{i.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Message</f:facet>
+					<h:outputText value="#{i.message}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Date</f:facet>
+					<h:outputText value="#{i.date}" />
+				</h:column>
+
+			</h:dataTable>
+		</div>
+		<div id="log">
+			<h:dataTable value="#{LogBean.getLastLog()}" var="i"
+				styleClass="default-table-big" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer"
+				columnClasses="celluleLeft">
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{i.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Message</f:facet>
+					<h:outputText value="#{i.message}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Date</f:facet>
+					<h:outputText value="#{i.date}" />
+				</h:column>
+			</h:dataTable>
+		</div>
+	</div>
+</h:body>
+</html>
